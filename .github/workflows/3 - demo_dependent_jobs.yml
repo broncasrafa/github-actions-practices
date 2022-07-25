@@ -1,5 +1,5 @@
 # This is a basic workflow to help you get started with Actions
-name: "2 - Multiples Jobs"
+name: "3 - Dependent Jobs"
 
 # Controla quando o fluxo de trabalho será executado
 on:
@@ -39,7 +39,10 @@ jobs:
   explore-github-actions:
     runs-on: ubuntu-latest
     name: explore-github-actions
-    
+    # needs identifica que qualquer job deve ser concluido com sucesso antes deste job (explore-github-actions) ser executado
+    # Esse código pode ser uma string ou array de strings. Se houver falha em um job, todos os jobs que dependem dele serão ignorados, 
+    # a menos que os jobs usem uma expressão condicional que faça o job continuar.
+    needs: build
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -51,6 +54,7 @@ jobs:
           echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."      
           echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
           echo "🖥️ The workflow is now ready to test your code on the runner."
+          echo "This repository belongs to ${{ github.repository_owner }}"
       
       - name: List files in the repository
         run: |
