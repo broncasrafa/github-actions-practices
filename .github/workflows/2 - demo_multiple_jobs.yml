@@ -14,7 +14,7 @@ on:
 
 # Uma execução de workflow é composta por um ou mais jobs que podem ser executados sequencialmente ou em paralelo
 jobs:
-  # Este workflow contem um unico job chamado "build"
+  # Este workflow contem dois jobs chamados "build" e "explore-github-actions"
   build:
     # O tipo de executor (runner) no qual o job será executado
     runs-on: ubuntu-latest
