@@ -5,7 +5,7 @@ name: "Github Action Demo"
 on:
   # Dispara o workflow em eventos de solicitação push or pull mas somente para branch 'main'
   push:
-    branches: [ "main" ]
+    branches: [ "main", "teste**", "feature**" ]
   pull_request:
     branches: [ "main" ]
   
