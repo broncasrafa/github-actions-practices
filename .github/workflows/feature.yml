@@ -1,0 +1,29 @@
+name: Build & Open PR to develop
+
+on:
+  push:
+    branches:
+      - feature**
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      # Aqui você adicionaria os comandos para construir e testar sua aplicação
+      - name: Abrir PR
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Automatically opened pull request'
+          title: 'Automatically opened pull request from ${GITHUB_ACTOR} (${GITHUB_ACTOR_EMAIL})'
+          branch: develop
+          body: |
+            This pull request was automatically opened by the CI/CD pipeline.
+            
+            Source Branch: ${GITHUB_REF}
+            
+            ID: ${{ github.event.repository.full_name }}#${{ github.event.number }}
+          labels: 'source branch: ${GITHUB_REF#refs/heads/} -> destination develop'
